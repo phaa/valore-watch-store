@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Registro do Usuário{% endblock %}
+
+{% block content %}
+<main class="form-signin">
+      
+  <form>
+    <img class="bi mb-2" width="40" height="32" src="{% static 'img/relogio_preto.svg' %}" alt="">
+    <h1 class="h3 mb-3 fw-normal">REGISTRE-SE</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="email@email.com">
+      <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Senha">
+      <label for="floatingPassword">Senha</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword2" placeholder="Confirme a senha">
+      <label for="floatingPassword2">Confirme a senha</label>
+    </div>
+
+    <div class="checkbox mt-3 mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Lembrar-me
+      </label>
+    </div>
+    <a href="../user/logperfil.html" class="w-100 btn btn-lg btn-warning" type="submit">Entrar</a> 
+    <p class="mt-5 mb-3 text-muted">Todos os direitos reservados &copy; <script>document.write(new Date().getFullYear())</script></p>
+  </form>
+  
+</main>
+{% endblock %}

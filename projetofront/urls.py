@@ -18,7 +18,11 @@ from django.urls import path, include
 
 # Urls Includes
 from core import urls as core_urls
+from authentication import urls as auth_urls
+from user import urls as user_urls
 
 urlpatterns = [
     path('', include(core_urls)),
+    path('auth/', include(auth_urls)),
+    path('user/', include(user_urls)),
 ]

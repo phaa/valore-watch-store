@@ -1,0 +1,145 @@
+{% extends "user_base.html" %}
+{% load static %}
+
+{% block title %}Meus endereços{% endblock %}
+
+{% block content %}
+<main class="container">
+  <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="user.html">Início</a></li>
+      <li class="breadcrumb-item" aria-current="page"><span class="badge bg-warning rounded-pill">Endereços</span></li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-md-8 col-lg-8 mb-3">
+      <h4 class="mb-3">ADICIONAR ENDEREÇO</h4>
+      <div class="card p-3">
+        <form class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="zip" class="form-label">CEP *</label>
+              <input type="text" class="form-control" id="zip" placeholder="00000-000" required>
+              <div class="invalid-feedback">
+                Por favor, digite seu CEP.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="address" class="form-label">Logradouro *</label>
+              <input type="text" class="form-control" id="address" placeholder="Ex: Rua Correia de Lemos" required>
+              <div class="invalid-feedback">
+                Por favor, digite seu logradouro.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="number" class="form-label">Número *</label>
+              <input type="text" class="form-control" id="number" placeholder="Número" required>
+              <div class="invalid-feedback">
+                Digite um número válido
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="complement" class="form-label">Complemento</label>
+              <input type="text" class="form-control" id="complement" placeholder="Apto 3, terceiro andar">
+            </div>
+            <div class="col-md-6">
+              <label for="reference" class="form-label">Referência</label>
+              <input type="text" class="form-control" id="reference" placeholder="Ao lado da padaria">
+            </div>
+            <div class="col-md-6">
+              <label for="neighborhood" class="form-label">Bairro *</label>
+              <input type="text" class="form-control" id="neighborhood" placeholder="Bairro" required>
+              <div class="invalid-feedback">
+                Digite um bairro válido
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="city" class="form-label">Cidade *</label>
+              <input type="text" class="form-control" id="city" placeholder="Cidade" required>
+              <div class="invalid-feedback">
+                Cidade inválida
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="state" class="form-label">UF</label>
+              <select class="form-select" id="state" required>
+                <option value="">Escolha uma UF</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+                <option value="EX">Estrangeiro</option>
+              </select>
+              <div class="invalid-feedback">
+                Selecione um estado
+              </div>
+            </div>
+          </div>
+          <div class="form-check mt-3 mb-3">
+            <input type="checkbox" class="form-check-input" id="default-address">
+            <label class="form-check-label" for="default-address">Tornar esse o meu endereço padrão</label>
+          </div>
+          <button class="w-100 btn btn-warning btn-lg mb-3" type="submit">Salvar endereço <span data-feather="arrow-right"></span></button>
+        </form>
+      </div>
+      
+    </div>
+    <div class="col-md-4 col-lg-4">
+      <h4 class="mb-3">ENDEREÇOS CADASTRADOS <span data-feather="home"></span></h4>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Casa (principal)</h5>
+          <p class="card-text">Rua Cel Manoel Duarte, n° 23<br> 
+            Tirol - Goianinha,RN <br> 
+            59177-000 <br>
+          </p>
+          <a href="#" class="link-warning custom-link">Editar</a> <a href="#" class="link-danger custom-link">Excluir</a>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Casa de Tia</h5>
+          <p class="card-text">Avenida Abdon Grilo, n° 2045<br> 
+            Capim Macio - Natal,RN <br> 
+            59121-000 <br>
+          </p>
+          <a href="#" class="link-warning custom-link">Editar</a> <a href="#" class="link-danger custom-link">Excluir</a>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Meu apartamento</h5>
+          <p class="card-text">Rua das Camélias, n° 299, Bloco B, apto 201 <br> 
+            Lagoa Nova - Currais Novos,RN <br> 
+            59173-000 <br>
+          </p>
+          <a href="#" class="link-warning custom-link">Editar</a> <a href="#" class="link-danger custom-link">Excluir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
