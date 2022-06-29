@@ -8,3 +8,7 @@ def index(request):
 
 def anuncio(request):
     return render(request, 'relogio.html')
+
+
+def home(request):
+    return render(request, '')

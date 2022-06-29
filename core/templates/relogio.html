@@ -41,7 +41,7 @@
   <body>
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item " aria-current="page"><span class="badge bg-warning rounded-pill"><a href="../user/logperfil.html">Home</a></li>
+        <li class="breadcrumb-item " aria-current="page"><span class="badge bg-warning rounded-pill"><a href=" {% url 'homepage' %} ">Home</a></li>
         <li class="breadcrumb-item" aria-current="page"><span class="badge bg-warning rounded-pill">produto</span></li>
       </ol>
     </nav>
@@ -55,7 +55,7 @@
            <span class="texto-descricao">Tradicionalmente, a data era indicada por um ponteiro que apontava para marcadores sobre a borda do mostrador. Com o Datejust, a Rolex lançou um calendário que exibia a data em uma abertura às 3&nbsp;h no mostrador. Além de ser esteticamente agradável, esta inovação facilitou a leitura da hora e da data, agora visíveis em um breve olhar. Desde então, a indicação da data em uma abertura se tornou um padrão para os relógios de pulso.&nbsp;</span>
         </div>
        <center><div class="col-12 mt-4 " > 
-          <img style="height: auto; width: 100%;" src="../images/rolex16.webp"
+          <img style="height: auto; width: 100%;" src="{% static 'images/rolex16.webp' %}"
             class="media-object  img-responsive img-fluid rounded" >
           
         </div>  </center>
@@ -66,7 +66,7 @@
         </div>
         <div class="card-group mt-4 ">
           <div class="card bg-dark">
-            <img src="../images/rolex18.webp" class="card-img-top" alt="...">
+            <img src="{% static 'images/rolex18.webp' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Datejust 31</h5>
               <p class="card-text">NOVO MODELO 2022</p>
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="card bg-dark">
-            <img src="../images/rolex19.webp" class="card-img-top" alt="...">
+            <img src="{% static 'images/rolex19.webp' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Datejust 36</h5>
               <p class="card-text">NOVO MODELO 2022</p>
@@ -86,7 +86,7 @@
             </div>
           </div>
           <div class="card bg-dark">
-            <img src="../images/rolex20.webp" class="card-img-top" alt="...">
+            <img src="{% static 'images/rolex20.webp' %}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Datejust 41</h5>
               <p class="card-text">NOVO MODELO 2022</p>
