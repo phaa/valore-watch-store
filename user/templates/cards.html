@@ -1,6 +1,6 @@
 {% extends "user_base.html" %}
 {% load static %}
-
+{% load widget_tweaks %}
 {% block title %}Meus cartões{% endblock %}
 
 {% block content %}
@@ -15,8 +15,9 @@
     <div class="col-md-8 col-lg-8 mb-3">
       <h4 class="card-title mb-3">Adicionar cartão <span data-feather="edit"></span></h4>
       <div class="card p-3">
-        <form class="needs-validation " novalidate>
-          <div>
+        <form class="needs-validation " method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <!--div>
             <div class="form-check">
               <input id="credit" name="paymentMethod" type="radio" class="form-check-input" required>
               <label class="form-check-label" for="credit">Crédito</label>
@@ -25,12 +26,12 @@
               <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
               <label class="form-check-label" for="debit">Débito</label>
             </div>
-          </div>
+          </div-->
 
           <div class="row gy-3">
             <div class="col-md-8">
               <label for="cc-name" class="form-label">Nome no cartão *</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="Nome no cartão" required>
+              {{ form.owner|add_class:"form-control" }}
               <small class="text-muted">Nome conforme escrito no cartão</small>
               <div class="invalid-feedback">
                 Digite um nome
@@ -39,7 +40,7 @@
             
             <div class="col-md-4">
               <label for="cc-expiration" class="form-label">Validade *</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="00/00" required>
+              {{ form.valid_until|add_class:"form-control" }} 
               <small class="text-muted">Ex. 00/00</small>
               <div class="invalid-feedback">
                 Data de validade obrigatória
@@ -48,7 +49,7 @@
 
             <div class="col-md-8">
               <label for="cc-number" class="form-label">Número do cartão *</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="0000 0000 0000 0000" required>
+              {{ form.number|add_class:"form-control" }}
               <small class="text-muted">Digite os números sem espaço</small>
               <div class="invalid-feedback">
                   Digite um número válido de cartão
@@ -57,7 +58,7 @@
 
             <div class="col-md-4">
               <label for="cc-cvv" class="form-label">CVV *</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="000" required>
+              {{ form.cvv|add_class:"form-control" }}
               <small class="text-muted">Código de 3 dígitos</small>
               <div class="invalid-feedback">
                 Código de segurança obrigatório
@@ -65,19 +66,30 @@
             </div>
           </div>
 
-          <button class="mt-4 btn btn-warning btn-lg float-end" type="submit">Adicionar</button>
+          <input value="Adicionar" class="mt-4 btn btn-warning btn-lg float-end" type="submit"/>
         </form>
       </div>
     </div>
     <div class="col-md-4 col-lg-4">
       <h4 class="mb-3">CARTÕES CADASTRADOS <span data-feather="credit-card"></span></h4>
+      {% for card in cards %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="card-title2">{{ card.number }} <img class="d-inline-block float-end" src="{% static 'img/cards/master.png' %}" alt="" srcset=""></p>
+          <p class="card-text">{{ card.owner }}</p>
+          <a href="#" class="link-warning custom-link">Editar</a> <a href="#" class="link-danger custom-link">Excluir</a>
+      </div>
+      {% empty %}
+        <li>Nenhum cartão cadastrado</li>
+      {% endfor %}
+      
       <div class="card mb-3">
         <div class="card-body">
           <p class="card-title2">**** **** **** 5853 <img class="d-inline-block float-end" src="{% static 'img/cards/master.png' %}" alt="" srcset=""></p>
           <p class="card-text">JOSE M S DANTAS</p>
           <a href="#" class="link-warning custom-link">Editar</a> <a href="#" class="link-danger custom-link">Excluir</a>
           
-        </div>
+      </div>
       </div>
       <div class="card mb-3">
         <div class="card-body">

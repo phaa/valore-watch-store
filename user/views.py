@@ -15,10 +15,10 @@ def orders(request):
 
 def products(request):
     return render(request, 'my_products.html')
-
+'''
 def cards(request):
     return render(request, 'cards.html')
-
+'''
 def addresses(request):
     return render(request, 'address.html')
 
@@ -27,25 +27,6 @@ def add_product(request):
 
 
 # Credit card views
-def create_credit_card(request):
-    
-    if request.method == "POST":
-        form = CreditCardForm(request.POST)
-        
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('index')
-            except:
-                pass
-    else:
-        form = CreditCardForm()
-    
-    context = {
-        "form": form
-    }
-    return render(request, 'cards.html', context)
-
 def show_credit_cards(request):  
     cards = CreditCard.objects.all()  
     context = {
@@ -54,14 +35,34 @@ def show_credit_cards(request):
     return render(request, "cards.html", context)   
 
 
-def edit(request, id):  
+def create_credit_card(request):
+    context = {}
+    if request.method == "POST":
+        form = CreditCardForm(request.POST or None)
+        
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('user_cards')
+            except:
+                pass
+    else:
+        context["cards"] = CreditCard.objects.all() 
+        context["form"]= CreditCardForm()
+     
+    return render(request, 'cards.html', context)
+
+
+
+def edit_card(request, id):  
     card = CreditCard.objects.get(id=id)  
     context = {
         "card": card
     }
     return render(request, 'edit.html', context)  
 
-def update(request, id):  
+
+def update_card(request, id):  
     card = CreditCard.objects.get(id=id)  
     form = CreditCardForm(request.POST, instance=card)  
     
@@ -73,8 +74,9 @@ def update(request, id):
         "card": card
     }
     return render(request, 'edit.html', context)  
-    
-def destroy(request, id):  
+
+
+def destroy_card(request, id):  
     card = CreditCard.objects.get(id=id)  
     card.delete()  
     return redirect("/show")  

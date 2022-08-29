@@ -1,9 +1,5 @@
 import uuid
-
-from turtle import title
-
 from django.db import models
-
 
 class Address(models.Model):
     zipCode = models.IntegerField('Cep')
@@ -15,7 +11,6 @@ class Address(models.Model):
     state = models.CharField('Estado', max_length=30)
 
 
-# Create your models here.
 class CreditCard(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     owner = models.CharField("Portador", max_length=100)
