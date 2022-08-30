@@ -13,17 +13,18 @@
   </nav>
   <div class="row">
     <div class="col-md-8 col-lg-8 mb-3">
-      <h4 class="card-title mb-3">Adicionar cartão <span data-feather="edit"></span></h4>
+      <h4 class="card-title mb-3">Editar cartão <span data-feather="edit"></span></h4>
       <div class="card p-3">
-        <form class="needs-validation" action="{% url 'user_cards' %}" method="POST" enctype="multipart/form-data">
+        <form class="needs-validation" action="{% url 'update_card' card.id %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           {% for hidden in form.hidden_fields %}
             {{ hidden }}
-          {% endfor %} 
+          {% endfor %}
+
           <div class="row gy-3">
             <div class="col-md-8">
               <label for="cc-name" class="form-label">Nome no cartão *</label>
-              {% render_field form.owner class+="form-control" %}
+              {% render_field form.owner class+="form-control" value=card.owner %}
               <small class="text-muted">Nome conforme escrito no cartão</small>
               <div class="invalid-feedback">
                 Digite um nome
@@ -32,7 +33,7 @@
             
             <div class="col-md-4">
               <label for="cc-expiration" class="form-label">Validade *</label>
-              {% render_field form.valid_until class+="form-control" %}
+              {% render_field form.valid_until class+="form-control" value=card.valid_until %}
               <small class="text-muted">Ex. 00/00</small>
               <div class="invalid-feedback">
                 Data de validade obrigatória
@@ -41,7 +42,7 @@
 
             <div class="col-md-8">
               <label for="cc-number" class="form-label">Número do cartão *</label>
-              {% render_field form.number class+="form-control" %}
+              {% render_field form.number class+="form-control" value=card.number %}
               <small class="text-muted">Digite os números sem espaço</small>
               <div class="invalid-feedback">
                   Digite um número válido de cartão
@@ -50,7 +51,7 @@
 
             <div class="col-md-4">
               <label for="cc-cvv" class="form-label">CVV *</label>
-              {% render_field form.cvv class+="form-control" %}
+              {% render_field form.cvv class+="form-control" value=card.cvv %}
               <small class="text-muted">Código de 3 dígitos</small>
               <div class="invalid-feedback">
                 Código de segurança obrigatório
@@ -58,7 +59,7 @@
             </div>
           </div>
 
-          <input value="Adicionar" class="mt-4 btn btn-warning btn-lg float-end" type="submit"/>
+          <input value="Salvar" class="mt-4 btn btn-warning btn-lg float-end" type="submit"/>
         </form>
       </div>
     </div>

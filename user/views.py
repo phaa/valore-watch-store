@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import CreditCardForm  
-from .models import CreditCard  
+from .forms import AddressForm, CreditCardForm  
+from .models import Address, CreditCard  
 
 
 # Create your views here.
@@ -15,10 +15,7 @@ def orders(request):
 
 def products(request):
     return render(request, 'my_products.html')
-'''
-def cards(request):
-    return render(request, 'cards.html')
-'''
+
 def addresses(request):
     return render(request, 'address.html')
 
@@ -26,20 +23,56 @@ def add_product(request):
     return render(request, 'add_product.html')
 
 
-# Credit card views
-def show_credit_cards(request):  
-    cards = CreditCard.objects.all()  
-    context = {
-        "cards": cards
-    }
-    return render(request, "cards.html", context)   
-
-
-def create_credit_card(request):
-    context = {}
+# Address views
+def create_address(request):
+    print("acessando addresses")
     if request.method == "POST":
-        form = CreditCardForm(request.POST or None)
-        
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('user_addresses')
+            except:
+                pass
+    else:
+        addresses = Address.objects.all() 
+        form = AddressForm()
+     
+    context = {
+        "addresses": addresses,
+        "form": form
+    }
+
+    return render(request, 'address.html', context)
+
+
+def update_address(request, id):  
+    address = Address.objects.get(id=id)  
+    form = AddressForm(request.POST, instance=address)  
+    
+    if form.is_valid():  
+        form.save()  
+        return redirect("user_addresses")  
+    
+    context = {
+        "address": address,
+        "addresses": Address.objects.all(),
+        "form": form
+    }
+    return render(request, 'address_edit.html', context)  
+
+
+def destroy_address(request, id):  
+    address = Address.objects.get(id=id)  
+    address.delete()  
+    return redirect("user_addresses")  
+
+
+
+# Credit card views
+def create_credit_card(request):
+    if request.method == "POST":
+        form = CreditCardForm(request.POST)
         if form.is_valid():
             try:
                 form.save()
@@ -47,19 +80,15 @@ def create_credit_card(request):
             except:
                 pass
     else:
-        context["cards"] = CreditCard.objects.all() 
-        context["form"]= CreditCardForm()
+        cards = CreditCard.objects.all() 
+        form = CreditCardForm()
      
-    return render(request, 'cards.html', context)
-
-
-
-def edit_card(request, id):  
-    card = CreditCard.objects.get(id=id)  
     context = {
-        "card": card
+        "cards": cards,
+        "form": form
     }
-    return render(request, 'edit.html', context)  
+
+    return render(request, 'cards.html', context)
 
 
 def update_card(request, id):  
@@ -68,15 +97,17 @@ def update_card(request, id):
     
     if form.is_valid():  
         form.save()  
-        return redirect("/show")  
+        return redirect("user_cards")  
     
     context = {
-        "card": card
+        "card": card,
+        "cards": CreditCard.objects.all(),
+        "form": form
     }
-    return render(request, 'edit.html', context)  
+    return render(request, 'card_edit.html', context)  
 
 
 def destroy_card(request, id):  
     card = CreditCard.objects.get(id=id)  
     card.delete()  
-    return redirect("/show")  
+    return redirect("user_cards")  

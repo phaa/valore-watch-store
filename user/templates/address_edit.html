@@ -15,79 +15,88 @@
     <div class="col-md-8 col-lg-8 mb-3">
       <h4 class="mb-3">ADICIONAR ENDEREÇO</h4>
       <div class="card p-3">
-        <form class="needs-validation" action="{% url 'user_addresses' %}" method="POST" enctype="multipart/form-data" >
+        <form class="needs-validation" action="{% url 'update_address' address.id %}" method="POST" enctype="multipart/form-data" >
           {% csrf_token %}
           {% for hidden in form.hidden_fields %}
             {{ hidden }}
           {% endfor %}
           <div class="row g-3">
             <div class="col-md-12">
-              <label for="description" class="form-label">Descrição *</label>
-              {% render_field form.description class+="form-control" placeholder="Descrição do endereço" %}
+              <label for="description" class="form-label">Descrição * {{ address.description }}</label>
+              {% render_field form.description class+="form-control" value=address.description placeholder="Descrição do endereço" %}
               <div class="invalid-feedback">
                 {{ form.description.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="zip" class="form-label">CEP *</label>
-              {% render_field form.zip class+="form-control" placeholder="00000-000" %}
+              {% render_field form.zip class+="form-control" value=address.zip placeholder="00000-000" %}
               <div class="invalid-feedback">
                 {{ form.zip.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="address" class="form-label">Logradouro *</label>
-              {% render_field form.public_place class+="form-control" placeholder="Rua Correia de Lemos" %}
+              {% render_field form.public_place class+="form-control" value=address.public_place placeholder="Rua Correia de Lemos" %}
               <div class="invalid-feedback">
                 {{ form.public_place.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="number" class="form-label">Número *</label>
-              {% render_field form.number class+="form-control" placeholder="Número" %}
+              {% render_field form.number class+="form-control" value=address.number placeholder="Número" %}
               <div class="invalid-feedback">
                 {{ form.number.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="complement" class="form-label">Complemento</label>
-              {% render_field form.complement class+="form-control" placeholder="Número" %}
+              {% render_field form.complement class+="form-control" value=address.complement placeholder="Número" %}
               <div class="invalid-feedback">
                 {{ form.complement.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="reference" class="form-label">Referência</label>
-              {% render_field form.reference class+="form-control" placeholder="Ao lado da padaria" %}
+              {% render_field form.reference class+="form-control" value=address.reference placeholder="Ao lado da padaria" %}
               <div class="invalid-feedback">
                 {{ form.reference.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="neighborhood" class="form-label">Bairro *</label>
-              {% render_field form.neighborhood class+="form-control" placeholder="Bairro" %}
+              {% render_field form.neighborhood class+="form-control" value=address.neighborhood placeholder="Bairro" %}
               <div class="invalid-feedback">
                 {{ form.neighborhood.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="city" class="form-label">Cidade *</label>
-              {% render_field form.city class+="form-control" placeholder="Cidade" %}
+              {% render_field form.city class+="form-control" value=address.city placeholder="Cidade" %}
               <div class="invalid-feedback">
                 {{ form.city.errors }}
               </div>
             </div>
             <div class="col-md-6">
               <label for="state" class="form-label">UF</label>
-              {% render_field form.state class+="form-control" %}
+              
+              <select id="{{ form.state.id }}" class="form-control" name="{{ form.state.name }}">
+                {% for choice in form.state.field.choices %}
+                    {% if choice.0 == address.state %}
+                      <option value="{{ choice.0 }}" selected="selected">{{ choice.1 }}</option>
+                    {% else %}
+                      <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endif %}    
+                {% endfor %}
+              </select>
               <div class="invalid-feedback">
                 {{ form.state.errors }}
               </div>
             </div>
           </div>
           <div class="form-check mt-3 mb-3">
-            {% render_field form.is_main class+="form-check-input" %}
-            <label class="form-check-label" for="default-address">Tornar esse o meu endereço padrão</label>
+            {% render_field form.is_main class+="form-check-input" checked=address.is_main %}
+            <label class="form-check-label fs-6" for="id_is_main">Esse é o meu endereço principal</label>
           </div>
           <button class="w-100 btn btn-warning btn-lg mb-3" type="submit">Salvar endereço <span data-feather="arrow-right"></span></button>
         </form>
