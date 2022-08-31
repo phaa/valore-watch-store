@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import AddressForm, CreditCardForm  
-from .models import Address, CreditCard  
+from .forms import AddressForm, CreditCardForm, ProductForm
+from .models import Address, CreditCard, Product, ProductImage  
 
 
 # Create your views here.
@@ -111,3 +111,62 @@ def destroy_card(request, id):
     card = CreditCard.objects.get(id=id)  
     card.delete()  
     return redirect("user_cards")  
+
+
+# Product views
+def show_products(request):
+    products = Product.objects.all()
+    context = {
+        "products": products
+    }
+    return render(request, 'products_show.html', context)
+
+
+def create_product(request):
+    if request.method == "POST":
+        print("Dentro do post")
+        form = ProductForm(request.POST)
+        images = request.FILES.getlist('images')
+        if form.is_valid():
+            print("Form válido")
+            try:
+                new_product= form.save()
+
+                for image in images:
+                    print(vars(image))
+                    ProductImage.objects.create(name=image.name, product=new_product, image=image)
+
+                return redirect('user_products')
+            except:
+                pass
+        else:
+            print("Form invalido")
+    else:
+        form = ProductForm()
+     
+    context = {
+        "form": form
+    }
+
+    return render(request, 'product_add.html', context)
+
+
+def update_product(request, id):  
+    card = Product.objects.get(id=id)  
+    form = ProductForm(request.POST, instance=card)  
+    
+    if form.is_valid():  
+        form.save()  
+        return redirect("user_cards")  
+    
+    context = {
+        "card": card,
+        "form": form
+    }
+    return render(request, 'product_edit.html', context)  
+
+
+def destroy_product(request, id):  
+    product = Product.objects.get(id=id)  
+    product.delete()  
+    return redirect("user_products") 

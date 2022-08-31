@@ -1,5 +1,5 @@
 from django import forms  
-from .models import Address, CreditCard  
+from .models import Address, CreditCard, Product 
 
 class AddressForm(forms.ModelForm):  
     class Meta:  
@@ -26,4 +26,16 @@ class CreditCardForm(forms.ModelForm):
             "number",
             "valid_until",
             "cvv"
-        ]  
+        ] 
+
+
+class ProductForm(forms.ModelForm):  
+    class Meta:  
+        model = Product  
+        fields = [
+            "name",
+            "price",
+            "brand",
+            "description",
+            "category",
+        ] 

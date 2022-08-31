@@ -1,16 +1,51 @@
 import uuid
 from django.db import models
 
-# Produtos e afins
-class ProductCategory(models.Model):
-    id = models.UUIDField("Id", primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100)
+# https://www.watchdepot.com.au/types-of-watches
+CATEGORIES = (
+    ('AV', 'Aviador'),
+    ('ML', 'Militar'),
+    ('CR', 'Corredor'),
+    ('MR', 'Mergulhador'),
+    ('CM', 'Campo'),
+    ('FS', 'Fashion'),
+    ('LX', 'Luxuoso'),
+    ('ST', 'Smart'),
+    ('FT', 'Fitness'),
+    ('BS', 'Bolso'),
+    ('MD', 'Médico'),
+    ('ES', 'Esportivo'),
+    ('RS', 'Rústico'),
+    ('FR', 'Formal'),
+)
+
+BRANDS = (
+    ('AR', 'Armani'),
+    ('CT', 'Cartier'),
+    ('CS', 'Casio'),
+    ('CP', 'Champion'),
+    ('MB', 'Montblanc'),
+    ('MM', 'Mormaii'),
+    ('RX', 'Rolex'),
+    ('TH', 'Tommy Hilfighter'),
+    ('WP', 'Wempe'),
+)
 
 class Product(models.Model):
     id = models.UUIDField("Id", primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField("Nome", max_length=100)
     price = models.DecimalField("Preço", max_digits=5, decimal_places=2)
-    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    brand = models.CharField("Marca", max_length=2, choices=BRANDS)
+    description = models.TextField("Descrição")
+    category = models.CharField("Categoria", max_length=2, choices=CATEGORIES)
+    total_sales = models.IntegerField("Total Sales")
+
+class ProductImage(models.Model):
+    name = models.CharField(max_length=255)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/')
+    default = models.BooleanField(default=False)
+
 
 STATES = (
         ('AC', 'Acre'),
@@ -43,11 +78,6 @@ STATES = (
     )
 
 # Endereços e afins
-class State(models.Model):
-    id = models.UUIDField("Id", primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField("Nome", max_length=2, choices=STATES)
-
-
 class Address(models.Model):
     id = models.UUIDField("Id", primary_key=True, default=uuid.uuid4, editable=False)
     zip = models.IntegerField('Cep')

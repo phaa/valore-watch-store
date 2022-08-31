@@ -87,7 +87,7 @@
           </div>
           <div class="form-check mt-3 mb-3">
             {% render_field form.is_main class+="form-check-input" %}
-            <label class="form-check-label" for="default-address">Tornar esse o meu endereço padrão</label>
+            <label class="form-check-label" for="default-address">Esse é o meu endereço principal</label>
           </div>
           <button class="w-100 btn btn-warning btn-lg mb-3" type="submit">Salvar endereço <span data-feather="arrow-right"></span></button>
         </form>
@@ -101,7 +101,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ address.description }} {{ address.is_main|yesno:"(Principal)," }}</h5>
           <p class="card-text">{{ address.public_place }}, n° {{ address.number }}<br> 
-            {{ address.neighborhood }} - {{ address.city }},{{ address.state }} <br> 
+            {{ address.neighborhood }} - {{ address.city }}, {{ address.state }} <br> 
             {{ address.zip }} <br>
           </p>
           <a href="{% url 'update_address' address.id %}" class="link-warning custom-link">Editar</a> <a href="{% url 'destroy_address' address.id %}" class="link-danger custom-link">Excluir</a>
