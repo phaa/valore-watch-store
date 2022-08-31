@@ -1,6 +1,4 @@
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
 from .views import index, user_data, orders, products, addresses, add_product
 
 # Endereços
@@ -33,7 +31,8 @@ urlpatterns = [
     # Produtos
     path('meusprodutos/', show_products, name='user_products'),
     path('meusprodutos/adicionar/', create_product, name='add_product'),
+    #path('meusprodutos/detalhar/<uuid:id>', product_detail, name='product_detail'),
     path('meusprodutos/atualizar/<uuid:id>', update_product, name='update_product'),
     path('meusprodutos/apagar/<uuid:id>', destroy_product, name='destroy_product'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 

@@ -72,6 +72,7 @@ def destroy_address(request, id):
 # Credit card views
 def create_credit_card(request):
     if request.method == "POST":
+        
         form = CreditCardForm(request.POST)
         if form.is_valid():
             try:
@@ -124,23 +125,17 @@ def show_products(request):
 
 def create_product(request):
     if request.method == "POST":
-        print("Dentro do post")
         form = ProductForm(request.POST)
         images = request.FILES.getlist('images')
         if form.is_valid():
-            print("Form válido")
             try:
                 new_product= form.save()
-
                 for image in images:
-                    print(vars(image))
                     ProductImage.objects.create(name=image.name, product=new_product, image=image)
 
                 return redirect('user_products')
             except:
                 pass
-        else:
-            print("Form invalido")
     else:
         form = ProductForm()
      
@@ -152,16 +147,21 @@ def create_product(request):
 
 
 def update_product(request, id):  
-    card = Product.objects.get(id=id)  
-    form = ProductForm(request.POST, instance=card)  
-    
+    product = Product.objects.get(id=id)  
+    form = ProductForm(request.POST, instance=product)
+    images = ProductImage.objects.filter(product=product)
+    new_images = request.FILES.getlist('images') or []
+
     if form.is_valid():  
-        form.save()  
-        return redirect("user_cards")  
+        form.save()
+        for image in new_images:
+            ProductImage.objects.create(name=image.name, product=product, image=image)
+        return redirect("user_products")  
     
     context = {
-        "card": card,
-        "form": form
+        "product": product,
+        "form": form,
+        "images": images
     }
     return render(request, 'product_edit.html', context)  
 

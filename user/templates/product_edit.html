@@ -22,15 +22,15 @@
     
     <div class="row">
         <div class="col-md-12">
-            <form class="needs-validation" action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data" >
+            <form class="needs-validation" action="{% url 'update_product' product.id %}" method="POST" enctype="multipart/form-data" >
                 {% csrf_token %}
                 {% for hidden in form.hidden_fields %}
                     {{ hidden }}
                 {% endfor %}
                 <div class="row gy-3 mb-3">
                     <div class="col-md-6">
-                        <label for="cc-name" class="form-label">Descrição do produto</label>
-                        {% render_field form.name class+="form-control" placeholder="Nome do produto aqui" %}
+                        <label for="cc-name" class="form-label">Nome do produto</label>
+                        {% render_field form.name class+="form-control" value=product.name placeholder="Nome do produto aqui" %}
                         <small class="text-muted">Nome que aparecerá no título do anúncio</small>
                         <div class="invalid-feedback">
                             {{ form.name.errors }}
@@ -39,7 +39,7 @@
 
                     <div class="col-md-6">
                         <label for="cc-number" class="form-label">Preço</label>
-                        {% render_field form.price class+="form-control" placeholder="R$ 00.000,00" %}
+                        {% render_field form.price class+="form-control" value=product.price placeholder="R$ 00.000,00" %}
                         <small class="text-muted">Digite apenas números</small>
                         <div class="invalid-feedback">
                             {{ form.price.errors }}
@@ -48,17 +48,31 @@
                     
                     <div class="col-md-6">
                         <label for="cc-brand" class="form-label">Marca</label>
-                        {% render_field form.brand class+="form-control" %}
+                        <select id="{{ form.brand.id }}" class="form-control" name="{{ form.brand.name }}">
+                            {% for choice in form.brand.field.choices %}
+                                {% if choice.0 == product.brand %}
+                                  <option value="{{ choice.0 }}" selected="selected">{{ choice.1 }}</option>
+                                {% else %}
+                                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                {% endif %}    
+                            {% endfor %}
+                        </select>
                         <div class="invalid-feedback">
                             {{ form.brand.errors }}
                         </div>
                     </div>
-        
-                    
 
                     <div class="col-md-6">
                         <label for="cc-color" class="form-label">Categoria</label>
-                        {% render_field form.category class+="form-control" %}
+                        <select id="{{ form.category.id }}" class="form-control" name="{{ form.category.name }}">
+                            {% for choice in form.category.field.choices %}
+                                {% if choice.0 == product.category %}
+                                  <option value="{{ choice.0 }}" selected="selected">{{ choice.1 }}</option>
+                                {% else %}
+                                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                {% endif %}    
+                            {% endfor %}
+                        </select>
                         <div class="invalid-feedback">
                             {{ form.category.errors }}
                         </div>
@@ -66,7 +80,7 @@
 
                     <div class="col-md-12">
                         <label for="cc-number" class="form-label">Descrição</label>
-                        {% render_field form.description class+="form-control" placeholder="Descrição completa do produto" %}
+                        <textarea name="description" cols="40" rows="10" class="form-control" placeholder="Descrição do produto" required="" id="id_description">{{ product.description }}</textarea>
                         <small class="text-muted">Dê o máximo de detalhes o possível do seu produto</small>
                         <div class="invalid-feedback">
                             {{ form.description.errors }}
@@ -75,7 +89,7 @@
 
                     <div class="col-md-12">
                         <label for="cc-number" class="form-label">Fotos do produto</label>
-                        <input id="product-images" class="form-control" type="file" name="images" multiple required>
+                        <input id="product-images" class="form-control" type="file" name="images" multiple>
                         <small class="text-muted">Escolha boas imagens para o seu produto</small>
                         <div class="invalid-feedback">
                         </div>
@@ -83,9 +97,14 @@
                 </div>
     
                 <div class="input-images"></div>
-
-                <button class="mt-4 btn btn-warning btn-lg float-end" type="submit">Adicionar</button>
+                <a class="mt-4 btn btn-danger btn-lg float-end ms-2" href="{% url 'destroy_product' product.id %}">Excluir</a>
+                <input class="mt-4 btn btn-warning btn-lg float-end" type="submit" value="Atualizar">  
             </form>
+            <div>
+                {% for image in images %}
+                    <img width="200" height="200" src="{{ image.image.url }}" class="img-thumbnail" alt="">
+                {% endfor %}
+            </div>
         </div>
     </div>
   </div>

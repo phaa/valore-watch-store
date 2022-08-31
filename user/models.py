@@ -38,7 +38,7 @@ class Product(models.Model):
     brand = models.CharField("Marca", max_length=2, choices=BRANDS)
     description = models.TextField("Descrição")
     category = models.CharField("Categoria", max_length=2, choices=CATEGORIES)
-    total_sales = models.IntegerField("Total Sales")
+    total_sales = models.IntegerField("Total Sales", default=0)
 
 class ProductImage(models.Model):
     name = models.CharField(max_length=255)

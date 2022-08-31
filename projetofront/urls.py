@@ -21,8 +21,11 @@ from core import urls as core_urls
 from authentication import urls as auth_urls
 from user import urls as user_urls
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', include(core_urls)),
     path('auth/', include(auth_urls)),
     path('user/', include(user_urls)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
