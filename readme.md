@@ -1,5 +1,9 @@
 # Luxury Watch E-commerce Platform
 
+<p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/static/img/relogio_preto.svg" title="Valore Watch Store" width="150"/>
+  </p>
+
 ## Overview
 
 This project is an e-commerce platform prototype built with Django, specializing in the sale of luxury watches. It was developed as part of the Backend II course during my undergraduate program in Internet Systems Technology at IFRN (Federal Institute of Education, Science and Technology of Rio Grande do Norte). The platform aims to provide a seamless and elegant shopping experience, allowing users to browse a curated selection of high-end timepieces, manage their accounts, process orders, and handle payments.
@@ -30,16 +34,42 @@ The screenshots showcase key features of the application, including product list
 
 The following screenshots provide a visual overview of the application:
 
-* **Homepage (Image 8):** Displays a selection of luxury watches available for browsing.
-* **Add Product (Image 1):** Form for adding new watch listings to the platform (likely an admin/seller interface).
-* **Add Card (Image 2):** Interface for users to add their credit card details for payments.
-* **Add Address (Image 3):** Form for users to input and save their shipping addresses.
-* **Personal Data (Image 4):** Section for users to manage their personal information and profile picture.
-* **My Orders (Image 5):** Displays a history of the user's past orders with status and details.
-* **Order Details/Tracking (Image 6):** Shows the details and status of a specific order.
-* **Registration (Image 7):** User registration form.
-* **Login (Image 9):** User login form.
-
+* **Homepage:** Displays a selection of luxury watches available for browsing.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_.png" title="Valore Watch Store" width="800" />
+  </p>
+* **Registration:** User registration form.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_auth_register_.png" title="Valore Watch Store" width="800" />
+  </p>
+* **Login:** User login form.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_auth_login_.png" title="Valore Watch Store" width="800" />
+  </p>
+  * **User index / Last order tracking:** Shows the details and status of a specific order.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_user.png" title="Valore Watch Store" width="800" />
+  </p>
+* **Personal Data:** Section for users to manage their personal information and profile picture.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_user_meusdados_.png" title="Valore Watch Store" width="800" />
+  </p>
+* **Add Product:** Form for adding new watch listings to the platform.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_user_meusprodutos_adicionar_.png" title="Valore Watch Store" width="800" />
+  </p>
+* **Add Card:** Interface for users to add their credit card details for payments.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_user_meuscartoes_.png" title="Valore Watch Store" width="800" />
+  </p>
+* **Add Address:** Form for users to input and save their shipping addresses.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_user_enderecos_.png" title="Valore Watch Store" width="800" />
+  </p>
+* **My Orders:** Displays a history of the user's past orders with status and details.
+  <p align="center">
+    <img src="https://github.com/phaa/valore-watch-store/blob/main/screenshots/localhost_8000_user_pedidos_.png" title="Valore Watch Store" width="800" />
+  </p>
 
 ## Get the project
 
