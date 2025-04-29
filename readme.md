@@ -1,8 +1,8 @@
-# Luxury Watch E-commerce Platform
+# Valore - Luxury Watch E-commerce
 
 <p align="center">
     <img src="https://github.com/phaa/valore-watch-store/blob/main/static/img/relogio_preto.svg" title="Valore Watch Store" width="150"/>
-  </p>
+</p>
 
 ## Overview
 
@@ -25,6 +25,7 @@ The screenshots showcase key features of the application, including product list
 
 * **Django:** A high-level Python web framework used for building the backend of the e-commerce platform.
 * **Python:** The primary programming language.
+* **Docker:** Containerization of the application
 * **HTML, CSS, JavaScript:** For the frontend structure, styling, and interactivity.
 * **Database:** Standart Django SQLite.
 * **Pillow** Imagem processing.
