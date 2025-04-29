@@ -1,0 +1,15 @@
+services:
+  web:
+    container_name: luxury_watch_app
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=uma_string_longa_e_aleatoria_muito_secreta_e_segura
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn --bind 0.0.0.0:8000 projetofront.wsgi"
